@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Inter:wght@400;600;800&display=swap');
+:root { --dark: #0f172a; --accent: #1e3a8a; --danger: #ef4444; --text-muted: #64748b; }
+body { background: #f1f5f9; font-family: 'Inter', sans-serif; margin: 0; padding: 20px 0; display: flex; justify-content: center; }
+.main-card, .dashboard-container { background: white; width: 92%; max-width: 420px; padding: 25px; border-radius: 25px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+.brand-name { font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 4px; color: var(--dark); text-align: center; margin: 10px 0; }
+.brand-name-mini { font-family: 'Cinzel', serif; letter-spacing: 2px; font-size: 15px; margin: 0; }
+.brand-tagline { font-size: 9px; letter-spacing: 2px; color: #94a3b8; text-align: center; font-weight: 700; text-transform: uppercase; margin-bottom: 25px; }
+.elegant-monogram { font-family: 'Cinzel', serif; font-size: 35px; text-align: center; color: var(--accent); }
+.divider-text, .section-label { font-size: 9px; font-weight: 800; letter-spacing: 1.5px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 12px; }
+input, select { width: 100%; padding: 12px; margin: 6px 0; border: 1px solid #e2e8f0; border-radius: 10px; background: #f8fafc; box-sizing: border-box; font-size: 13px; }
+.btn-primary { width: 100%; background: var(--dark); color: white; border: none; padding: 14px; border-radius: 12px; font-weight: 700; cursor: pointer; }
+.btn-secondary { width: 100%; background: white; color: var(--dark); border: 2px solid #f1f5f9; padding: 10px; border-radius: 12px; font-weight: 700; cursor: pointer; font-size: 12px; }
+.btn-tab { flex: 1; padding: 10px; border: none; border-radius: 10px; cursor: pointer; background: #f1f5f9; font-weight: 700; color: var(--text-muted); font-size: 11px; }
+.btn-tab.active { background: var(--dark); color: white; }
+.user-row { background: #f8fafc; padding: 12px; border-radius: 12px; margin-bottom: 8px; border: 1px solid #f1f5f9; }
+.user-row b { font-size: 11px; color: var(--dark); }
+.btn-delete-user { background: #fee2e2; color: #ef4444; border: none; border-radius: 8px; font-size: 10px; font-weight: 700; cursor: pointer; padding: 5px 10px; }
+.btn-logout-elegant { background: #fee2e2; color: var(--danger); border: none; padding: 5px 12px; border-radius: 8px; font-size: 10px; font-weight: 800; cursor: pointer; }
+.status-pendiente { color: #ef4444; } .status-revision { color: #1e3a8a; } .status-pagado { color: #22c55e; }
+.info-pago-movil { background: #f1f5f9; padding: 12px; border-radius: 15px; margin-bottom: 20px; font-size: 11px; line-height: 1.6; }
+.btn-eliminar-sol { background: #fecaca; color: #dc2626; border: none; border-radius: 8px; padding: 5px 10px; font-size: 10px; font-weight: 800; cursor: pointer; }
+.btn-action-admin { background: var(--dark); color: white; border: none; padding: 5px 10px; border-radius: 8px; font-size: 10px; font-weight: 800; cursor: pointer; }
+.admin-access-box { background: white; padding: 10px; border-radius: 10px; margin-bottom: 10px; border: 1px solid var(--accent); font-size: 10px; color: var(--text-muted); }
+.admin-access-box b { color: var(--dark); font-weight: 800; }

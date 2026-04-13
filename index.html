@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FÉDIX CAPITAL - Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <section id="login-screen" class="main-card">
+    <div class="central-logo-area">
+      <div class="elegant-monogram">AC</div>
+      <h1 class="brand-name">FÉDIX CAPITAL</h1>
+      <p class="brand-tagline">SERVICIOS FINANCIEROS PROFESIONALES</p>
+    </div>
+    <div class="login-form">
+      <input type="email" id="email" placeholder="CORREO ELECTRÓNICO">
+      <input type="password" id="pass" placeholder="CONTRASEÑA">
+      <button class="btn-primary" onclick="intentarLogin()">ACCEDER AL PORTAL</button>
+      <div style="margin-top:25px; text-align:center;">
+        <p class="divider-text">¿NUEVO CRÉDITO?</p>
+        <button class="btn-secondary" onclick="mostrarSolicitud()">SOLICITAR AHORA</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="dashboard-admin" class="dashboard-container" style="display:none;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+      <h2 class="brand-name-mini">FÉDIX ADMIN</h2>
+      <button onclick="logout()" class="btn-logout-elegant">SALIR</button>
+    </div>
+    <div style="display:flex; gap:10px; margin-bottom:20px;">
+       <button class="btn-tab active" id="tab1" onclick="cambiarTab(1)">COBROS</button>
+       <button class="btn-tab" id="tab2" onclick="cambiarTab(2)">CLIENTES</button>
+    </div>
+    <div id="vista-cobros">
+      <p class="section-label">SOLICITUDES ENTRANTES</p>
+      <div id="lista-solicitudes-admin"></div>
+      <p class="section-label" style="margin-top:20px;">NUEVO REGISTRO / AÑADIR CRÉDITO</p>
+      <input type="text" id="cliente-nombre" placeholder="NOMBRE COMPLETO">
+      <input type="email" id="cliente-correo" placeholder="CORREO">
+      <input type="password" id="cliente-pass" placeholder="ASIGNAR CLAVE">
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+        <input type="number" id="monto-base" placeholder="MONTO $">
+        <input type="number" id="cuotas" placeholder="CUOTAS (MESES)">
+      </div>
+      <button class="btn-primary" style="margin-top:10px;" onclick="crearPrestamo()">APROBAR Y REGISTRAR</button>
+      <input type="text" id="buscador-admin" onkeyup="renderizarAdmin()" placeholder="🔍 BUSCAR CLIENTE..." style="margin-top:20px;">
+      <div id="lista-cuotas-admin"></div>
+    </div>
+    <div id="vista-clientes" style="display:none;">
+      <p class="section-label">GESTIÓN DE LÍMITES POR USUARIO</p>
+      <div id="tabla-usuarios-monitoreo"></div>
+    </div>
+  </section>
+
+  <section id="dashboard-cliente" class="dashboard-container" style="display:none;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+      <h2 class="brand-name-mini" id="saludo-cliente">HOLA</h2>
+      <button onclick="logout()" class="btn-logout-elegant">SALIR</button>
+    </div>
+    <div class="info-pago-movil">
+      <p class="section-label" style="margin-bottom:5px; color:var(--accent);">DATOS DE PAGO MÓVIL</p>
+      <b>BANCO:</b> MERCANTIL | <b>CÉDULA:</b> 17.006.718<br>
+      <b>TELÉFONO:</b> 0412-0701747
+    </div>
+    <div class="card-section" style="margin-bottom:20px;">
+      <p class="section-label">REPORTAR PAGO</p>
+      <div style="display:flex; gap:5px;">
+        <select id="select-cuota" style="width:45%; padding:10px; border-radius:10px; border:1px solid #e2e8f0; font-size:11px;"></select>
+        <input type="text" id="ref-pago" placeholder="N° REFERENCIA" style="margin:0; flex:1;">
+      </div>
+      <button class="btn-primary" style="margin-top:10px; padding:10px; font-size:11px;" onclick="enviarReferencia()">ENVIAR REFERENCIA</button>
+    </div>
+    <p class="section-label">RESUMEN DE MI CRÉDITO</p>
+    <div id="lista-cuotas-cliente"></div>
+  </section>
+
+  <section id="solicitud-screen" class="main-card" style="display:none;">
+    <h1 class="brand-name" style="font-size:22px;">SOLICITUD</h1>
+    <input type="text" id="sol-nombre" placeholder="SU NOMBRE">
+    <input type="email" id="sol-correo" placeholder="SU CORREO">
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:15px;">
+      <button class="btn-secondary" onclick="verificarBloqueo(50)">$50</button>
+      <button class="btn-secondary" onclick="verificarBloqueo(100)">$100 🔒</button>
+      <button class="btn-secondary" onclick="verificarBloqueo(150)">$150 🔒</button>
+      <button class="btn-secondary" onclick="verificarBloqueo(200)">$200 🔒</button>
+      <button class="btn-secondary" onclick="verificarBloqueo(500)">$500 🔒</button>
+      <button class="btn-secondary" onclick="verificarBloqueo(1000)">$1000 🔒</button>
+    </div>
+    <div id="confirmar-solicitud-area" style="display:none; margin-top:20px;">
+      <p style="font-size:12px; text-align:center; font-weight:bold; color:var(--accent);" id="resumen-monto"></p>
+      <button class="btn-primary" onclick="enviarSolicitud()">CONFIRMAR ENVIAR DATOS</button>
+    </div>
+    <button onclick="mostrarPantalla('login-screen')" class="btn-secondary" style="margin-top:20px; border:none;">← CANCELAR</button>
+  </section>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
